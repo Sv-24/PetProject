@@ -1,0 +1,45 @@
+import pytest
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver = webdriver.Chrome()
+wait = WebDriverWait(driver, 10)
+
+USERNAME = 'standard_user'
+PASSWORD = 'secret_sauce'
+
+
+@pytest.fixture
+def login_to_saucedemo():
+    driver.maximize_window()
+    driver.implicitly_wait(10)
+    driver.get("https://www.saucedemo.com/")
+
+    username_field = driver.find_element(By.XPATH, '//input[@data-test="username"]')
+    username_field.send_keys(USERNAME)
+
+    password_field = driver.find_element(By.XPATH, '//input[@data-test="password"]')
+    password_field.send_keys(PASSWORD)
+
+    login_button = driver.find_element(By.XPATH, '//input[@data-test="login-button"]')
+    login_button.click()
+
+
+@pytest.fixture
+def add_profuct_to_saucedome():
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "inventory_list")))
+    add_button = driver.find_element(By.CSS_SELECTOR, '#add-to-cart-sauce-labs-backpack')
+    add_button.click()
+
+    WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.XPATH, '//div[@id="shopping_cart_container"]')))
+    container_button = driver.find_element(By.CLASS_NAME, "shopping_cart_container")
+    container_button.click()
+
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="cart_list"]')))
+    item = driver.find_element(By.XPATH, '//div[@class="inventory_item_name" and text() = "Sauce Labs Backpack"] ')
+    assert item.is_displayed(), " item is not displayed in the cart_list."
+
+
