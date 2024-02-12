@@ -30,12 +30,12 @@ def login_to_saucedemo():
 @pytest.fixture
 def add_profuct_to_saucedome():
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "inventory_list")))
-    add_button = driver.find_element(By.CSS_SELECTOR, '#add-to-cart-sauce-labs-backpack')
+    add_button = driver.find_element(By.XPATH,'//button[@id="add-to-cart-sauce-labs-backpack"]')
     add_button.click()
 
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.XPATH, '//div[@id="shopping_cart_container"]')))
-    container_button = driver.find_element(By.CLASS_NAME, "shopping_cart_container")
+    container_button = driver.find_element(By.XPATH,'//div[@id="shopping_cart_container"]')
     container_button.click()
 
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="cart_list"]')))

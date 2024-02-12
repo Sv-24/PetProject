@@ -8,12 +8,12 @@ class TestAddProduct:
 
     def test_add_product_functionality(self, login_to_saucedemo):
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "inventory_list")))
-        add_button = driver.find_element(By.CSS_SELECTOR, '#add-to-cart-sauce-labs-backpack')
+        add_button = driver.find_element(By.XPATH, '//button[@id="add-to-cart-sauce-labs-backpack"]')
         add_button.click()
 
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, '//div[@id="shopping_cart_container"]')))
-        container_button = driver.find_element(By.CLASS_NAME, "shopping_cart_container")
+        container_button = driver.find_element(By.XPATH, '//div[@id="shopping_cart_container"]')
         container_button.click()
 
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="cart_list"]')))
