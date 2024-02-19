@@ -43,7 +43,7 @@ class TestLoginPage:
         first_item = driver.find_element(By.XPATH, '//a[@id="item_4_img_link"]')
         assert first_item.is_displayed(), "First item is not displayed correctly."
 
-        print("Test passed: User successfully logged in and viewed the available products.")
+        print("Test1 passed: User successfully logged in and viewed the available products.")
 
         driver.close()
 
