@@ -31,6 +31,6 @@ class TestCheckoutProcess:
         header = driver.find_element(By.XPATH, '//*[@id="checkout_complete_container"]/h2')
         assert header.is_displayed(), "Order confirmation message not found"
 
-        print("Test passed: THANK YOU FOR YOUR ORDER a confirmation message is displayed.")
+        print("Test4 passed: THANK YOU FOR YOUR ORDER a confirmation message is displayed.")
 
         driver.close()

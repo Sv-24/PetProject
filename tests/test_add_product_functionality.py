@@ -20,6 +20,6 @@ class TestAddProduct:
         item = driver.find_element(By.XPATH, '//div[@class="inventory_item_name" and text() = "Sauce Labs Backpack"] ')
         assert item.is_displayed(), " item is not displayed in the cart_list."
 
-        print("Test passed: The item is present in the cart.")
+        print("Test2 passed: The item is present in the cart.")
 
         driver.close()

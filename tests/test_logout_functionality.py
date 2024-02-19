@@ -24,6 +24,6 @@ class TestLogoutPage:
         driver.get(restricted_page_url)
         WebDriverWait(driver, 10).until(EC.url_to_be("https://www.saucedemo.com/"))
 
-        print("User successfully log out of the application")
+        print("Test passed:User successfully log out of the application")
 
         driver.close()
