@@ -20,6 +20,7 @@ class TestLoginPage:
 
         username_field = driver.find_element(By.XPATH, '//input[@data-test="username"]')
         username_field.send_keys(USERNAME)
+        # TODO: add step for checking username field value
         assert username_field.is_displayed(), "The username is not visible."
 
         password_field = driver.find_element(By.XPATH, '//input[@data-test="password"]')
