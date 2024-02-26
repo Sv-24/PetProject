@@ -2,6 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 driver = webdriver.Chrome()
 wait = WebDriverWait(driver, 10)
@@ -39,6 +43,7 @@ class TestLoginPage:
         assert current_password_value == PASSWORD, "The password is not displayed correctly"
 
         login_button = driver.find_element(By.XPATH, '//input[@data-test="login-button"]')
+        assert login_button.is_displayed(), "The button is not visible"
         login_button.click()
 
         result = self.verify_current_url(driver, expected_product_page_url)
@@ -51,6 +56,7 @@ class TestLoginPage:
         first_item = driver.find_element(By.XPATH, '//a[@id="item_4_img_link"]')
         assert first_item.is_displayed(), "First item is not displayed correctly."
 
-        print("Test passed:", result)
+        #print("Test passed:", result)
+        logging.info("Test passed:", result)
 
         driver.close()
