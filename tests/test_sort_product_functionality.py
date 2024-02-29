@@ -66,6 +66,6 @@ class TestSortProduct:
         assert product_prices == sorted(product_prices,
                                         reverse=True), "Products are not sorted correctly by price (high to low)"
 
-        print("Test passed: The products is sorted with different ways.")
+        print("Test3 passed: The products is sorted with different ways.")
 
         driver.close()
