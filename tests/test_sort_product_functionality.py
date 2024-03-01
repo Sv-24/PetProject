@@ -15,6 +15,11 @@ class TestSortProduct:
     def test_sort_product_a_z_functionality(self, login_to_saucedemo):
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="inventory_list"]')))
 
+        product_names_elements_before = driver.find_elements(By.CLASS_NAME, "inventory_item_name")
+        product_names_before = [elem.text for elem in product_names_elements_before]
+
+        assert product_names_before == sorted(product_names_before), "The products ate not sorted"
+
         sort_option = driver.find_element(By.XPATH, '//span[@class="select_container"]')
         assert sort_option.is_displayed(), " The button is not visible"
         sort_option.click()
@@ -32,6 +37,11 @@ class TestSortProduct:
     def test_sort_product_z_a_functionality(self, login_to_saucedemo):
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="inventory_list"]')))
 
+        product_names_elements_before = driver.find_elements(By.CLASS_NAME, "inventory_item_name")
+        product_names_before = [elem.text for elem in product_names_elements_before]
+
+        assert product_names_before == sorted(product_names_before), "The products ate not sorted"
+
         sort_option = driver.find_element(By.XPATH, '//span[@class="select_container"]')
         assert sort_option.is_displayed(), "The button is not visible"
         sort_option.click()
@@ -44,7 +54,8 @@ class TestSortProduct:
         product_names = [elem.text for elem in product_names_elements]
 
         if sort_option_z_a == "Name (Z to A)":
-            assert product_names == sorted(product_names), "Products are not sorted alphabetically (Z to A)"
+            assert product_names == sorted(product_names,
+                                           reverse=True), "Products are not sorted alphabetically (Z to A)"
 
     def test_sort_product_price_low_high_functionality(self, login_to_saucedemo):
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="inventory_list"]')))
