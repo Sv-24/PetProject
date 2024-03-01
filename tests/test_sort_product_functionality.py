@@ -92,4 +92,5 @@ class TestSortProduct:
 
         logging.info("Test passed: The products is sorted with different ways.")
 
+
         driver.close()

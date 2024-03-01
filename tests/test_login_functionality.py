@@ -2,15 +2,27 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 driver = webdriver.Chrome()
 wait = WebDriverWait(driver, 10)
 
 USERNAME = 'standard_user'
 PASSWORD = 'secret_sauce'
+expected_product_page_url = "https://www.saucedemo.com/inventory.html"
 
 
 class TestLoginPage:
+    @staticmethod
+    def verify_current_url(driver, expected_url):
+        current_url = driver.current_url
+        if current_url == expected_url:
+            return "User is redirected to the product page."
+        else:
+            return "User is not redirected to the product page."
 
     def test_login_functionality(self):
 
@@ -19,31 +31,31 @@ class TestLoginPage:
         driver.get("https://www.saucedemo.com/")
 
         username_field = driver.find_element(By.XPATH, '//input[@data-test="username"]')
-        username_field.send_keys(USERNAME)
         assert username_field.is_displayed(), "The username is not visible."
+        username_field.send_keys(USERNAME)
+        current_username_value = username_field.get_attribute("value")
+        assert current_username_value == USERNAME, "The username is not displayed correctly.."
 
         password_field = driver.find_element(By.XPATH, '//input[@data-test="password"]')
+        assert password_field.is_displayed(), "The username is not visible."
         password_field.send_keys(PASSWORD)
+        current_password_value = password_field.get_attribute("value")
+        assert current_password_value == PASSWORD, "The password is not displayed correctly"
 
         login_button = driver.find_element(By.XPATH, '//input[@data-test="login-button"]')
+        assert login_button.is_displayed(), "The button is not visible"
         login_button.click()
 
-        expected_product_page_url = "https://www.saucedemo.com/inventory.html"
-        current_url = driver.current_url
-        if current_url == expected_product_page_url:
-            print("User is redirected to the product page.")
-        else:
-            print("User is not redirected to the product page.")
+        result = self.verify_current_url(driver, expected_product_page_url)
 
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="inventory_list"]' )))
+        page_header = driver.find_element(By.XPATH, '//div[@class="app_logo"]')
+        assert page_header.is_displayed(), "Page header is not displayed."
 
-        #inventory_list = driver.find_element(By.XPATH, '//div[@class="inventory_list"]')
-        #assert inventory_list.is_displayed(), "Inventory list is not displayed."
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="inventory_list"]')))
 
         first_item = driver.find_element(By.XPATH, '//a[@id="item_4_img_link"]')
         assert first_item.is_displayed(), "First item is not displayed correctly."
 
-        print("Test passed: User successfully logged in and viewed the available products.")
+        logging.info("Test passed:", result)
 
         driver.close()
-
