@@ -32,7 +32,7 @@ class TestSortProduct:
         product_names = [elem.text for elem in product_names_elements]
 
         if sort_option_a_z == "Name (A to Z)":
-            assert product_names == sorted(product_names), "Products are not sorted alphabetically (A to Z)"
+            assert product_names == sorted(product_names), "Products are not sorted alphabetically (A to Z)."
 
     def test_sort_product_z_a_functionality(self, login_to_saucedemo):
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="inventory_list"]')))
