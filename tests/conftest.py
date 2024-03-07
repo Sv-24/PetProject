@@ -40,4 +40,4 @@ def add_product_to_bucket():
 
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="cart_list"]')))
     item = driver.find_element(By.XPATH, '//div[@class="inventory_item_name" and text() = "Sauce Labs Backpack"] ')
-    assert item.is_displayed(), " item is not displayed in the cart_list."
+    assert item.is_displayed(), " item is not displayed in the cart_list"

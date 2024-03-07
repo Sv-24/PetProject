@@ -53,6 +53,6 @@ class TestCheckoutProcess:
         confirmation_message = header.text
         assert "Thank you for your order!" in confirmation_message, "Order confirmation message does not match"
 
-        logging.info("Test4 passed: Thank you for your order a confirmation message is displayed.")
+        logging.info("Test4 passed: Thank you for your order a confirmation message is displayed")
 
         driver.close()
