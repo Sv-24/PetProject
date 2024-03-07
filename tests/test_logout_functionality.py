@@ -1,3 +1,5 @@
+import logging
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,9 +15,11 @@ class TestLogoutPage:
         assert current_url == expected_product_page_url, "User is not redirected to the product page."
 
         menu_button = driver.find_element(By.XPATH, '//button[@id="react-burger-menu-btn"]')
+        assert menu_button.is_displayed(), "The button is not visible"
         menu_button.click()
 
         logout_button = driver.find_element(By.XPATH, '//a[@id="logout_sidebar_link"]')
+        assert logout_button.is_displayed(), "The button is not visible"
         logout_button.click()
 
         WebDriverWait(driver, 10).until(EC.url_to_be("https://www.saucedemo.com/"))
@@ -24,6 +28,6 @@ class TestLogoutPage:
         driver.get(restricted_page_url)
         WebDriverWait(driver, 10).until(EC.url_to_be("https://www.saucedemo.com/"))
 
-        print("Test passed:User successfully log out of the application")
+        logging.info("Test passed:User successfully log out of the application")
 
         driver.close()
