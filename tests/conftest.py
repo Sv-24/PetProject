@@ -28,7 +28,7 @@ def login_to_saucedemo():
 
     expected_product_page_url = "https://www.saucedemo.com/inventory.html"
     current_url = driver.current_url
-    assert current_url == expected_product_page_url, "User is not redirected to the product page"
+    assert current_url == expected_product_page_url, "User is not redirected to the product page."
 
 
 @pytest.fixture
