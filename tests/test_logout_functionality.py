@@ -35,6 +35,6 @@ class TestLogoutPage:
         header = driver.find_element(By.XPATH, '//div[@class="login_logo"]')
         assert header.is_displayed(), "Page header is not displayed."
 
-        logging.info("Test passed:User successfully log out of the application")
+        logging.info("Test passed:User successfully log out of the application.")
 
         driver.close()
